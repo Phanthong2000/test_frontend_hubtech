@@ -1,23 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Item from "./component/Item";
 
 function App() {
+  const [isHover, setIsHover] = useState(false);
+  const data1 = [
+    {
+      name: "Miễn phí giao hàng cho đơn hàng từ 50.000đ",
+      expire: "HSD: 26-05-2022",
+    },
+    {
+      name: "Miễn phí giao hàng cho đơn hàng từ 50.000đ",
+      expire: "HSD: 26-05-2022",
+    },
+    {
+      name: "Miễn phí giao hàng cho đơn hàng từ 50.000đ",
+      expire: "HSD: 26-05-2022",
+    },
+    {
+      name: "Miễn phí giao hàng cho đơn hàng từ 50.000đ",
+      expire: "HSD: 26-05-2022",
+    },
+  ];
+  const handleHoverRow = (status) => {
+    setIsHover(status);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div>Phan Van Thong</div>
+      <div
+        onMouseEnter={() => handleHoverRow(true)}
+        onMouseLeave={() => handleHoverRow(false)}
+        className="row"
+      >
+        <button
+          className={`button_prev ${isHover && data1.length > 3 ? `show` : ``}`}
         >
-          Learn React
-        </a>
-      </header>
+          {"<"}
+        </button>
+        {data1.map((item, index) => (
+          <Item key={index} item={item} />
+        ))}
+        <button
+          className={`button_next ${isHover && data1.length > 3 ? `show` : ``}`}
+        >
+          {">"}
+        </button>
+      </div>
     </div>
   );
 }
